@@ -12,81 +12,366 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg: #080611;
+            --purple: #a52fff;
+            --purple2: #c15cff;
+            --text: #ffffff;
+            --muted: #aaa0b7;
+        }
+
         body {
             min-height: 100vh;
             background: #080611;
-            color: #ffffff;
+            color: var(--text);
             font-family: Arial, sans-serif;
-            padding: 32px 17px;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           TOPO
+        ========================= */
+
+        header {
+            height: 57px;
+            border-top: 1px solid #292332;
+            border-bottom: 1px solid #301052;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5.5%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .logo-area img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .logo-area span {
+            color: #ffffff;
+        }
+
+        .logo-area strong {
+            color: var(--purple2);
+        }
+
+        .valorant {
+            color: #c8bdcf;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .valorant span {
+            color: var(--purple);
+        }
+
+        /* =========================
+           CONTEÚDO
+        ========================= */
+
+        main {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 25px 80px;
+        }
+
+        .hero {
+            text-align: center;
+        }
+
+        .hero img {
+            width: 180px;
+            max-width: 50%;
+            margin-bottom: 2px;
+            filter: drop-shadow(0 0 15px rgba(165, 47, 255, 0.5));
         }
 
         h1 {
-            text-align: center;
-            color: #c15cff;
-            font-size: 36px;
+            font-size: 48px;
+            line-height: 1;
             margin-bottom: 12px;
+            font-weight: 900;
         }
 
-        p {
-            font-size: 16px;
-            line-height: 1.7;
+        h1 .bot {
+            color: #ffffff;
+        }
+
+        h1 .gekko {
+            color: var(--purple);
+            font-style: italic;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 13px;
             margin-bottom: 20px;
         }
 
-        h2 {
-            color: #c15cff;
-            font-size: 24px;
-            margin-top: 26px;
-            margin-bottom: 8px;
+        /* =========================
+           DIVISÓRIA
+        ========================= */
+
+        .divider {
+            width: 280px;
+            max-width: 80%;
+            height: 30px;
+            margin: 15px auto 35px;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            width: 92px;
+            height: 2px;
+            background: #a52fff;
+            box-shadow: 0 0 12px #9d2cff;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .divider span {
+            position: absolute;
+            left: 50%;
+            top: 8px;
+            transform: translateX(-50%);
+            color: #ffffff;
+            font-size: 18px;
+            text-shadow: 0 0 18px #a52fff;
+        }
+
+        /* =========================
+           TERMOS
+        ========================= */
+
+        .terms {
+            width: 100%;
+            margin-top: 5px;
         }
 
         .data {
-            margin-bottom: 18px;
+            color: #ffffff;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .terms > p {
+            color: #eeeaf2;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: var(--purple2);
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(165, 47, 255, 0.25);
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+       footer {
+    border-top: 1px solid #191321;
+    min-height: 180px;
+    text-align: center;
+    padding-top: 35px;
+    color: #81778b;
+    font-size: 13px;
+}
+
+footer strong {
+    color: var(--purple2);
+}
+
+footer .heart {
+    color: var(--purple);
+}
+
+footer img {
+    display: block;
+    width: 45px;
+    height: 35px;
+    object-fit: contain;
+    margin: 18px auto 0;
+    opacity: 0.8;
+}
+
+footer .valorant-footer {
+    margin-top: -2px;
+    letter-spacing: 6px;
+    font-size: 9px;
+    color: #81778b;
+}
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 600px) {
+            header {
+                padding: 0 18px;
+            }
+
+            .valorant {
+                display: none;
+            }
+
+            main {
+                padding: 30px 18px 60px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .hero img {
+                width: 145px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Termos de Serviço</h1>
+    <!-- TOPO -->
+    <header>
+        <div class="logo-area">
+            <img src="valorant-gekko.png" alt="Gekko">
+            <span>[BOT] <strong>Gekko</strong></span>
+        </div>
 
-    <p class="data">
-        Última atualização: 07 de outubro de 2026
-    </p>
+        <div class="valorant">
+            VALORANT <span>♥</span>
+        </div>
+    </header>
 
-    <p>
-        Estes Termos de Serviço estabelecem as condições de uso do [BOT] Gekko.
-        Ao utilizar o bot, você concorda com estes termos.
-    </p>
 
-    <h2>1. Uso do bot</h2>
-    <p>
-        O [BOT] Gekko deve ser utilizado de forma adequada e de acordo com as
-        regras do Discord e as regras do servidor onde estiver instalado.
-    </p>
+    <!-- CONTEÚDO -->
+    <main>
 
-    <h2>2. Uso indevido</h2>
-    <p>
-        Não utilize o bot para spam, abuso, atividades ilegais ou para
-        prejudicar outros usuários ou servidores.
-    </p>
+        <section class="hero">
 
-    <h2>3. Disponibilidade</h2>
-    <p>
-        O bot pode ficar temporariamente indisponível para manutenção,
-        atualizações ou por problemas técnicos.
-    </p>
+            <img src="gekko.png" alt="Gekko">
 
-    <h2>4. Alterações</h2>
-    <p>
-        Estes termos podem ser atualizados quando necessário.
-    </p>
+            <h1>
+                <span class="bot">[BOT]</span>
+                <span class="gekko">Gekko</span>
+            </h1>
 
-    <h2>5. Contato</h2>
-    <p>
-        Para dúvidas sobre o [BOT] Gekko, entre em contato com a administração
-        responsável pelo bot.
-    </p>
+            <p class="subtitle">
+                Bot de suporte e eventos para a comunidade de <strong>VALORANT</strong>.
+            </p>
+
+            <div class="divider">
+                <span>✦</span>
+            </div>
+
+        </section>
+
+
+        <!-- TERMOS -->
+        <section class="terms">
+
+            <h2>Termos de Serviço</h2>
+
+            <p class="data">
+                Última atualização: 07 de outubro de 2026
+            </p>
+
+            <p>
+                Estes Termos de Serviço estabelecem as condições de uso do
+                [BOT] Gekko. Ao utilizar o bot, você concorda com estes termos.
+            </p>
+
+
+            <h2>1. Uso do bot</h2>
+
+            <p>
+                O [BOT] Gekko deve ser utilizado de forma adequada e de acordo
+                com as regras do Discord e as regras do servidor onde estiver instalado.
+            </p>
+
+
+            <h2>2. Uso indevido</h2>
+
+            <p>
+                Não utilize o bot para spam, abuso, atividades ilegais ou para
+                prejudicar outros usuários ou servidores.
+            </p>
+
+
+            <h2>3. Disponibilidade</h2>
+
+            <p>
+                O bot pode ficar temporariamente indisponível para manutenção,
+                atualizações ou por problemas técnicos.
+            </p>
+
+
+            <h2>4. Alterações</h2>
+
+            <p>
+                Estes termos podem ser atualizados quando necessário.
+            </p>
+
+
+            <h2>5. Contato</h2>
+
+            <p>
+                Para dúvidas sobre o [BOT] Gekko, entre em contato com a
+                administração responsável pelo bot.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>
+            <span class="heart">♥</span>
+            Feito com carinho por
+            <strong>Gaby</strong>
+            <span class="heart">♥</span>
+        </p>
+
+        <img src="gekko.png" alt="Gekko">
+
+        <div class="valorant-footer">
+            V A L O R A N T
+        </div>
+
+    </footer>
 
 </body>
 </html>
