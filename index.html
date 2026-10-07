@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>[BOT] Gekko • VALORANT</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080611;
+    --purple: #a42cff;
+    --purple2: #c15cff;
+    --light: #e9d8ff;
+    --text: #ffffff;
+    --muted: #aaa0b7;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    color: var(--text);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 28%,
+            rgba(113, 27, 190, 0.18),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 90% 70%,
+            rgba(93, 25, 180, 0.13),
+            transparent 28%
+        ),
+        #080611;
+}
+
+/* DECORAÇÕES LATERAIS */
+
+.bg-left,
+.bg-right {
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.bg-left {
+    left: -95px;
+    top: 160px;
+
+    width: 130px;
+    height: 340px;
+
+    background: linear-gradient(
+        135deg,
+        #42147d,
+        #210b42
+    );
+
+    clip-path: polygon(
+        0 0,
+        58% 0,
+        100% 24%,
+        58% 50%,
+        100% 76%,
+        58% 100%,
+        0 100%,
+        28% 76%,
+        0 50%,
+        28% 24%
+    );
+}
+
+.bg-right {
+    right: -90px;
+    top: 245px;
+
+    width: 175px;
+    height: 150px;
+
+    background: linear-gradient(
+        135deg,
+        #32105d,
+        #19072f
+    );
+
+    clip-path: polygon(
+        16% 0,
+        100% 0,
+        100% 100%,
+        16% 100%,
+        0 50%
+    );
+}
+
+/* NAV */
+
+.navbar {
+    height: 54px;
+
+    padding: 0 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 2;
+
+    background: rgba(8, 6, 17, 0.9);
+
+    border-bottom: 1px solid rgba(166, 62, 255, 0.32);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.logo-mark {
+    color: #b43dff;
+    font-size: 18px;
+
+    transform: rotate(45deg);
+
+    text-shadow: 0 0 12px #a42cff;
+}
+
+.logo b {
+    color: #b33dff;
+}
+
+.nav-title {
+    color: #c7b8d9;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    font-weight: 600;
+}
+
+.nav-title span {
+    color: #b43dff;
+
+    font-size: 12px;
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    z-index: 1;
+
+    min-height: 340px;
+
+    padding: 28px 20px 0;
+
+    display: flex;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.hero-content {
+    width: min(1000px, 100%);
+}
+
+/* GEKKO */
+
+.avatar-wrapper {
+    width: 205px;
+    height: 112px;
+
+    margin: 0 auto 2px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* TÍTULO */
+
+.hero h1 {
+    font-size: clamp(52px, 6vw, 72px);
+
+    line-height: 0.92;
+
+    letter-spacing: -5px;
+
+    font-weight: 900;
+
+    margin-top: 0;
+}
+
+.hero h1 .bot {
+    color: #f5f3f8;
+}
+
+.hero h1 .name {
+    color: #a82eff;
+
+    font-style: italic;
+
+    text-shadow:
+        0 0 30px rgba(168, 46, 255, 0.45);
+}
+
+.subtitle {
+    margin: 13px auto 0;
+
+    color: #aaa1b7;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.subtitle strong {
+    color: #ddd5e7;
+}
+
+/* DIVISÓRIA */
+
+.divider {
+    width: 280px;
+    max-width: 80%;
+
+    height: 30px;
+
+    margin: 15px auto 0;
+
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+
+    position: absolute;
+
+    top: 20px;
+
+    width: 92px;
+    height: 2px;
+
+    background: #a52fff;
+
+    box-shadow: 0 0 12px #9d2cff;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.divider span {
+    color: #b23aff;
+
+    font-size: 18px;
+
+    text-shadow: 0 0 18px #a52fff;
+}
+
+/* DOCUMENTOS */
+
+.documents {
+    position: relative;
+    z-index: 1;
+
+    width: min(820px, 100%);
+
+    margin: 0 auto;
+
+    padding: 0 24px 55px;
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 14px;
+}
+
+.section-header::before,
+.section-header::after {
+    content: "";
+
+    width: 43px;
+    height: 2px;
+
+    background: #a62fff;
+
+    box-shadow: 0 0 10px #a62fff;
+}
+
+.section-icon {
+    color: #b644ff;
+
+    font-size: 27px;
+}
+
+.section-header h2 {
+    font-size: 31px;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.card {
+    min-height: 145px;
+
+    position: relative;
+
+    display: block;
+
+    padding: 28px 58px 22px 105px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border: 1px solid rgba(139, 42, 255, 0.58);
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 16, 41, 0.98),
+            rgba(12, 8, 21, 0.98)
+        );
+
+    box-shadow:
+        inset 0 0 35px rgba(119, 31, 220, 0.05);
+
+    transition: 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    border-color: #b13dff;
+
+    box-shadow:
+        0 15px 45px rgba(119, 31, 220, 0.2);
+}
+
+.card-icon {
+    position: absolute;
+
+    left: 28px;
+    top: 35px;
+
+    color: #bb43ff;
+
+    font-size: 29px;
+
+    text-shadow:
+        0 0 15px rgba(187, 67, 255, 0.5);
+}
+
+.card h3 {
+    font-size: 16px;
+
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #aaa0b4;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+}
+
+.arrow {
+    position: absolute;
+
+    right: 14px;
+    bottom: 14px;
+
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: #e6caff;
+
+    font-size: 25px;
+
+    background: rgba(133, 39, 255, 0.13);
+
+    border: 1px solid rgba(165, 57, 255, 0.5);
+}
+
+/* FOOTER */
+
+footer {
+    position: relative;
+    z-index: 1;
+
+    padding: 32px 20px 45px;
+
+    text-align: center;
+
+    color: #85798e;
+
+    font-size: 13px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+footer strong {
+    color: #cda1ff;
+}
+
+.footer-heart {
+    color: #ad39ff;
+
+    font-size: 16px;
+
+    margin: 0 5px;
+}
+
+.footer-brand {
+    margin-top: 20px;
+
+    color: #80758a;
+
+    font-size: 10px;
+
+    letter-spacing: 5px;
+}
+
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.footer-valorant-icon {
+    width: 39px;
+    height: 35px;
+    object-fit: contain;
+    display: block;
+    filter: none;
+}
+
+/* CELULAR */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 0 18px;
+    }
+
+    .nav-title {
+        display: none;
+    }
+
+    .hero {
+        min-height: 475px;
+
+        padding-top: 35px;
+    }
+
+    .avatar-wrapper {
+        width: 205px;
+        height: 135px;
+    }
+
+    .avatar-wrapper::before {
+        left: -2px;
+
+        font-size: 34px;
+    }
+
+    .avatar-wrapper::after {
+        right: -2px;
+
+        font-size: 32px;
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 15vw, 70px);
+
+        letter-spacing: -3px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .card {
+        padding-left: 105px;
+    }
+
+    .card-icon {
+        left: 27px;
+    }
+
+    .section-header h2 {
+        font-size: 27px;
+    }
+
+    .bg-left {
+        opacity: 0.25;
+    }
+
+    .bg-right {
+        opacity: 0.25;
+    }
+}
+</style>
+
+<style>
+
+/* IMAGENS REAIS */
+
+.logo-image {
+    width: 43px;
+    height: 45px;    
+    object-fit: contain;
+    display: block;
+     transform: scale(1);
+    
+    /* mantém a cor original da imagem */
+    filter: none;
+}
+
+.avatar-image {
+    width: 205px;
+    height: 112px;
+    margin: 0 auto 2px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+}
+
+.avatar-image img {
+    width: 205px;
+    height: 112px;
+    max-height: 112px;
+    object-fit: contain;
+    display: block;
+
+    filter: none;
+    animation: none;
+}
+/* remove o antigo emoji */
+.avatar-wrapper{
+    width:190px;
+    height:105px;
+}
+
+@media(max-width:700px){
+    .logo-image{
+        width:24px;
+        height:24px;
+    }
+
+    .avatar-wrapper,
+    .avatar-image{
+        width:205px;
+        height:125px;
+    }
+
+    .avatar-image img{
+        width:205px;
+        max-height:125px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="bg-left"></div>
+<div class="bg-right"></div>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <img class="logo-image" src="valorant-icon-do-gekko.png" alt="Logo">
+        <span>
+            [BOT] <b>Gekko</b>
+        </span>
+
+    </div>
+
+    <div class="nav-title">
+        VALORANT <span>♥</span>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="avatar-wrapper">
+
+            <div class="avatar-image">
+                <img src="gekko.png" alt="Gekko">
+            </div>
+
+        </div>
+
+
+        <h1>
+
+            <span class="bot">[BOT]</span>
+
+            <span class="name">
+                Gekko
+            </span>
+
+        </h1>
+
+
+        <p class="subtitle">
+
+            Bot de suporte e eventos para a comunidade de
+            <strong>VALORANT</strong>.
+
+        </p>
+
+
+        <div class="divider">
+
+            <div class="footer-brand">
+       <img src="valorant-icon-do-gekko.png" alt="VALORANT" class="footer-valorant-icon">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DOCUMENTOS -->
+
+<section class="documents">
+
+    <div class="section-header">
+
+        <span class="section-icon">
+            ▤
+        </span>
+
+        <h2>
+            Documentos
+        </h2>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <!-- TERMOS -->
+
+        <a
+            href="terms.html"
+            class="card"
+        >
+
+            <div class="card-icon">
+                ▤
+            </div>
+
+            <h3>
+                Termos de Serviço
+            </h3>
+
+            <p>
+                Leia nossos termos de serviço antes
+                de usar o bot.
+            </p>
+
+            <div class="arrow">
+                →
+            </div>
+
+        </a>
+
+
+        <!-- PRIVACIDADE -->
+
+        <a
+            href="privacy.html"
+            class="card"
+        >
+
+            <div class="card-icon">
+                ♙
+            </div>
+
+            <h3>
+                Política de Privacidade
+            </h3>
+
+            <p>
+                Saiba como protegemos e utilizamos
+                suas informações.
+            </p>
+
+            <div class="arrow">
+                →
+            </div>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- RODAPÉ -->
+
+<footer>
+
+    <span class="footer-heart">
+        ♥
+    </span>
+
+    Feito com carinho por
+    <strong>Gaby</strong>
+
+    <span class="footer-heart">
+        ♥
+    </span>
+
+
+    <div class="footer-brand">
+        <img src="valorant-icon-do-gekko.png" alt="VALORANT" class="footer-valorant-icon">
+        <span>VALORANT</span>
+    </div>
+
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".card").forEach((card, i) => {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(10px)";
+    setTimeout(() => {
+      card.style.transition = "opacity .45s ease, transform .45s ease";
+      card.style.opacity = "1";
+      card.style.transform = "";
+    }, 180 + i * 120);
+  });
+});
+</script>
+</body>
+</html>
